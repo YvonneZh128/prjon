@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>reset transform</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="578" height="200"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      var rectWith = 150
+      var rectHeight = 75
+
+      context.translate(canvas.width / 2, canvas.height / 2)
+      context.fillStyle = 'blue'
+      context.fillRect(-rectWith /2, rectHeight / -2, rectWith, rectHeight)
+
+      // reset transform
+      // 1 0 0
+      // 0 1 0
+      // 0 0 1
+      // context.setTransform(1, 0, 0, 1, 0, 0)
+      context.fillStyle = 'red'
+      context.fillRect(0, 0, rectWith, rectHeight)
+    </script>
+</body>
+</html>

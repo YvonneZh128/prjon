@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>text basic</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="578" height="200"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      var text = 'Hello World'
+
+      var x = canvas.width / 2
+      var y = canvas.height / 2
+
+      context.font = 'bold 20pt Calibri'
+      context.fillStyle = 'blue'
+
+      context.textAlign = 'center' // start end left right
+      context.textBaseline = 'middle' //top hanging alphabetic bottom
+
+      var metrics = context.measureText(text)
+      var width = metrics.width
+
+      context.fillText('(' + width + 'px wide)', x, y)
+
+      // context.strokeStyle = 'red'
+      // context.strokeText('Hello World', 150, 100)
+    </script>
+</body>
+</html>

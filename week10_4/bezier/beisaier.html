@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title></title>
+    </head>
+    <body>
+        <canvas id="canvas" height="600" width="1000" style="border: 1px solid #000">
+
+        </canvas>
+    </body>
+    <script type="text/javascript">
+        var canvas = document.querySelector('#canvas');
+        var paint = canvas.getContext('2d');
+        paint.beginPath();
+
+        var num = 7;
+
+        var points = [];
+        var pointEs = [];
+
+        canvas.addEventListener('click', function(event) {
+            var point = {x: event.offsetX, y: event.offsetY};
+
+            if(points.length == 0) {
+                paint.moveTo(point.x, point.y);
+                paint.strokeStyle = '#000';
+                paint.lineWidth = 1;
+            }else {
+                paint.lineTo(point.x, point.y);
+                paint.stroke();
+            }
+            drawCircle(point);
+            points.push(point);
+
+            if(points.length >= num) {
+                (function() {
+                    var e = 1;
+                    var lastE = points[0];
+
+                    var timer = setInterval(function() {
+                        paint.clearRect(0,0,1000,600);
+
+                        drawFrame();
+
+                        var E = getPointE(e);
+                        pointEs.push(E);
+
+                        drawPointE();
+                        drawCircle(E, '#f00', 4);
+
+                        e++;
+                        lastE = E;
+                        if(e > 100) {
+                            console.log('draw complete');
+                            clearInterval(timer);
+                            points = [];
+                        }
+                    }, 50);
+
+                })();
+            }
+        });
+
+        function drawPointE() {
+            paint.beginPath();
+            paint.strokeStyle = '#f00';
+            paint.lineWidth = 2;
+            paint.moveTo(points[0].x, points[0].y);
+
+            for (var i = 0; i < pointEs.length; i++) {
+                paint.lineTo(pointEs[i].x, pointEs[i].y);
+            }
+            paint.stroke();
+        }
+
+        function getPointE(e) {
+            e = e / 100;
+            var me = 1 - e;
+
+            var midPoints = points;
+
+            paint.beginPath();
+            paint.strokeStyle = '#0f0';
+
+            for(var i = 1; i < num; i++) {
+                var arr = [];
+                for (var j = 0; j < num-i; j++) {
+                    var p = addPoint(getPoint(midPoints[j], me), getPoint(midPoints[j+1], e));
+                    if (j == 0) {
+                        paint.moveTo(p.x, p.y);
+                    } else {
+                        paint.lineTo(p.x, p.y);
+                        paint.stroke();
+                    }
+                    drawCircle(p, '#0f0', 4);
+                    arr.push(p);
+                }
+                midPoints = arr;
+            }
+
+            var E = midPoints[0];
+            return E;
+        }
+        function addPoint(pointA, pointB) {
+            return {x: pointA.x+pointB.x, y: pointA.y+pointB.y};
+        }
+        function getPoint(point, e) {
+            return {x: point.x*e, y: point.y*e};
+        }
+
+        function drawFrame() {
+            paint.beginPath();
+            paint.strokeStyle = '#000';
+            paint.lineWidth = 1;
+            paint.moveTo(points[0].x, points[0].y);
+            drawCircle(points[0]);
+            for (var i = 1; i < points.length; i++) {
+                paint.lineTo(points[i].x, points[i].y);
+                paint.stroke();
+                drawCircle(points[i]);
+            }
+
+        }
+
+        function drawCircle(point, color, r) {
+            paint.beginPath();
+            paint.fillStyle = color || '#000';
+            paint.arc(point.x, point.y, r || 5, 0, 2*Math.PI, false);
+            paint.fill();
+            paint.moveTo(point.x, point.y);
+        }
+
+    </script>
+</html>

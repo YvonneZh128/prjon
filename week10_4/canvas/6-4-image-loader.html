@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>image loader</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="578" height="400"></canvas>
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      var sources = {
+        darthVader: './darth-vader.jpg',
+        yoda: './yoda.jpg'
+      }
+
+      function loadImages(sources, callback) {
+        var images = {}
+        var loadedImages = 0
+        var numImages = 0
+
+        for(var src in sources) {
+          numImages++
+        }
+
+        for(var src in sources) {
+          images[src] = new Image()
+          images[src].onload = function() {
+            if(++loadedImages >= numImages) {
+              callback(images)
+            }
+          }
+          images[src].src = sources[src]
+        }
+      }
+
+      loadImages(sources, function(images){
+        context.drawImage(images.darthVader, 100, 30, 200, 137)
+        context.drawImage(images.yoda, 350, 55, 93, 104)
+      })
+    </script>
+</body>
+</html>

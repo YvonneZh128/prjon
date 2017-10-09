@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Arc</title>
+</head>
+<body>
+  <canvas id="canvas" width="578" height="200"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas')
+    var context = canvas.getContext('2d')
+
+    var x = canvas.width / 2
+    var y = canvas.height / 2
+    var radius = 75
+    var startAngle = 1.1 * Math.PI
+    var endAngle = 1.9 * Math.PI
+    var counterClockwise = false
+
+    context.beginPath()
+    context.arc(x, y, radius, startAngle, endAngle, counterClockwise)
+
+    context.strockStyle = 'black'
+    context.stroke()
+  </script>
+</body>
+</html>
