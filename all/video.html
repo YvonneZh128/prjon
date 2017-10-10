@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>视频播放</title>
+		<link rel="stylesheet" href="scss/video.css" />
+		<script src="js/jquery-1.11.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/video.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="box">
+			<video id="myvideo" src="video/3theB.mp4" width="100%" height="82%"></video>
+			<div class="control">
+				<p>
+					<i id="start" class="iconfont">&#xe6a1;</i>
+					<i id="pause" class="iconfont">&#xe66b;</i>
+					<i id="stop" class="iconfont">&#xe507;</i>
+				</p>
+				<div class="time">
+					<span class="min">00</span>:<span class="sec">00</span>
+					/<span class="overmin">00</span>:<span class="oversec">00</span>
+					<div class="process">
+						<span id="drag"></span>
+					</div>
+				</div>
+				<div class="sound">
+					<i class="iconfont has_sound">&#xe60b;</i>
+					<i class="iconfont no_sound">&#xe609;</i>
+					<!--<div class="voice-bar">
+						<div class="voice-bar-inner">
+							<div class="voice-block"></div>
+							
+						</div>
+
+					</div>-->
+					<div class="voice-bar"><p class="voice-block"></p></div>
+				</div>
+				<p>
+					<i id="Manping" class="iconfont">&#xe655;</i>
+					<i id="Xiaoping" class="iconfont">&#xe6af;</i>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
