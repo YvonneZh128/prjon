@@ -66,7 +66,28 @@ $(function(){
 		})
 	});
 	
-
+	var block=document.getElementById("drag");
+ 	var blockf=document.getElementsByClassName(".process")[0];
+ 	block.onmousedown = function(e){
+		var e = e || event;
+		var offsetmouse = {x:e.offsetX, y:e.offsetY};
+		document.onmousemove = function(e){
+			var e = e || event;
+			var mouse = {x:e.clientX, y:e.clientY};
+			var leftW= Math.min(mouse.x - offsetmouse.x,Math.max(10,mouse.x - offsetmouse.x + blockf.style.width));
+			block.style.left = leftW-2+ "px";
+			
+			blockf.css({
+				width:leftW
+			})
+		
+		}
+	}
+	document.onmouseup = function(e){
+		document.onmousemove = "";
+	}
+	
+	
 	function changeMusicActive(){
 		clearTimeout(st);
 		musicStart();

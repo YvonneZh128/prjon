@@ -30,22 +30,7 @@ $(function(){
 		$(".wrap > p").css('width',$('.wrap').width()* percent);
 		$("#drag").css("left",$('.wrap').width()* percent);
 		rotateClear();
-	});
-//	$("#on").click(function(){
-//		onoff1 = true; 
-//		$("#on").html('&#xe629;');
-//		if(audio !== null){
-//			if($("#on").html('&#xe629;')){
-//			}
-//			if($("#on").html('&#xe625;')){
-//				audio.pause();
-//				
-//			}
-//			
-//		}
-//	});
-
-	
+	});	
 	
 	//歌曲列表
 	var musiclist = [
@@ -172,6 +157,8 @@ $(function(){
 		//prev
 		$('#prev').click(function(){
 			$index--;
+			$("#play").hide();
+			$("#paused").show();
 			if($index <0) $index = $list_length;
 			changMusicInfo($index);
 			musicStart();
@@ -180,6 +167,8 @@ $(function(){
 		//next
 		$('#next').click(function(){
 			$index++;
+			$("#play").hide();
+			$("#paused").show();
 			if($index > $list_length) $index=0;
 			changMusicInfo($index);
 			musicStart();
